@@ -25,7 +25,7 @@ def get_test_matix(data_path):
         label_sort = mat1[:,-1]
     return mat_sort,label_sort
 
-def  train(data_path,params,unit_count):
+def  train(data_path,params,unit_count,model_path):
     print 'loding data...'
     if unit_count==0:
         test_mat ,test_label= get_test_matix(data_path)
@@ -45,7 +45,7 @@ def  train(data_path,params,unit_count):
     watchlist = [(xgtrain, 'train'),(xgval, 'val')]
 
     model = xgb.train(plst, xgtrain, num_rounds, watchlist,early_stopping_rounds=100)
-    model.save_model('./model/xgb_uint'+unit_count+'.model') # 用于存储训练出的模型
+    model.save_model(model_path+os.sep+'/xgb_uint'+unit_count+'.model') # 用于存储训练出的模型
 
     cost_time = time.time()-now
     print "end ......",'\n',"cost time:",cost_time,"(s)......"# -*- coding: utf-8 -*-
